@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name = 'stdgems_version'
   spec.version = StdgemsVersion::VERSION
   spec.authors = ['Taichi Ishitani']
-  spec.email = ["taichi730@gmail.com"]
+  spec.email = ['taichi730@gmail.com']
 
   spec.summary = 'Lookup version of default gem/bundled gem'
   spec.description = spec.summary
