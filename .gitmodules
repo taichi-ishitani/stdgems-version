@@ -1,0 +1,3 @@
+[submodule "stdgems"]
+	path = stdgems
+	url = https://github.com/janlelis/stdgems.git
