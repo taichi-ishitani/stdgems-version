@@ -19,7 +19,8 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.files = Dir.chdir(__dir__) do
-    `git ls-files -z lib LICENSE.txt *.md`.split("\x0")
+    `git ls-files --recurse-submodules -z \
+      lib LICENSE.txt *.md stdgems/*.md stdgems/*.json`.split("\x0")
   end
 
   spec.require_paths = ['lib']
