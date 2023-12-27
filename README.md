@@ -1,39 +1,69 @@
-# Stdgems::Version
+# StdgemsVersion
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/stdgems/version`. To experiment with that code, run `bin/console` for an interactive prompt.
+The `StdgemsVersion` is a gem to look up the version of a default/bundled gem installed with the executing Ruby.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add this line to your application's Gemfile and then execute `bundle install` command:
 
-Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```ruby
+gem 'stdgems_version'
+```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+Or install it yourself as:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```
+$ gem install stdgems_version
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Give the bundled/default gem name of which you want to know version to the `StdgemsVersion.version` method:
 
-## Development
+```ruby
+StdgemsVersion.version('csv') # => "3.2.8" for Ruby 3.0.0
+                              # => "3.2.6" for Ruby 3.2.2
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### Using for CI
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+You need to checkout this repository before executing `bundle install` to install dependencies. This is an example for GitHub Actions:
+
+```yaml
+steps:
+  - name: Checkout this repository
+    uses: actions/checkout@v4
+
+  - name: Checkout stdgems-version repository
+    uses: actions/checkout@v4
+    with:
+      repository: taichi-ishitani/stdgems-version
+      path: stdgems-version
+      submodules: true
+
+  - name: Setup Ruby
+    uses: ruby/setup-ruby@v1
+    with:
+      ruby-version: ${{ matrix.ruby }}
+      bundler-cache: true
+```
+
+Then, you need to load this gem from your Gemfile like below:
+
+```ruby
+require_relative 'stdgems-version/lib/stdgems_version'
+gem 'csv', StdgemsVersion.version('csv')
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/stdgems-version. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/stdgems-version/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/taichi-ishitani/stdgems-version. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/taichi-ishitani/stdgems-version/blob/master/CODE_OF_CONDUCT.md).
 
-## License
+## Copyright & License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+Copyright 2023 Taichi Ishitani. The StdgemsVersion gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
 
-Everyone interacting in the Stdgems::Version project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/stdgems-version/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the StdgemsVersion project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/taichi-ishitani/stdgems-version/blob/master/CODE_OF_CONDUCT.md).
