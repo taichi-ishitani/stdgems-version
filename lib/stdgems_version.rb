@@ -6,10 +6,7 @@ require_relative 'stdgems_version/version'
 module StdgemsVersion
   class << self
     def version(gem)
-      matched_version = find_version(gem, bundled_gems)
-      return matched_version if matched_version
-
-      find_version(gem, default_gems)
+      find_version(gem, bundled_gems) || find_version(gem, default_gems)
     end
 
     attr_writer :ruby_version
@@ -17,7 +14,7 @@ module StdgemsVersion
     private
 
     def find_version(gem, gem_list)
-      entry = gem_list['gems'].find { |e| e['gem'] == gem.to_s }
+      entry = gem_list.find { |e| e['gem'] == gem.to_s }
       return unless entry
 
       entry['versions'].inject(nil) do |matched_version, (ruby_version, gem_version)|
@@ -53,7 +50,7 @@ module StdgemsVersion
 
     def load_json(file)
       json = File.read(File.join(STDGEMS_DIR, file))
-      JSON.parse(json)
+      JSON.parse(json)['gems']
     end
   end
 end
