@@ -9,7 +9,7 @@ RSpec.describe StdgemsVersion do
     it 'should return version of the given default/bundled gem installed on the executing ruby' do
       stub_const('RUBY_VERSION', '3.3.0')
       expect(StdgemsVersion.version('csv')).to eq '3.2.8'
-      expect(StdgemsVersion.version('debug')).to eq '1.9.0'
+      expect(StdgemsVersion.version('debug')).to eq '1.9.1'
       expect(StdgemsVersion.version('did_you_mean')).to eq '1.6.3'
       expect(StdgemsVersion.version('prism')).to eq '0.19.0'
       expect(StdgemsVersion.version('rexml')).to eq '3.2.6'
